@@ -26,6 +26,8 @@ coverage/
 # Signing material never belongs in the repository
 *.jks
 *.keystore
+# Public test key for preview builds, not a secret: see .github/preview.
+!.github/preview/preview.keystore
 
 # IDE
 .idea/

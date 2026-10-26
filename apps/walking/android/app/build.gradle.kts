@@ -14,6 +14,11 @@ val keystoreProperties = Properties().apply {
     if (file.exists()) file.inputStream().use(::load)
 }
 
+// Preview builds (`flutter build apk -P preview=true`) are for testers. They
+// install next to the store version and are signed with a public test key
+// from the repository, so every new preview updates the previous one.
+val isPreview = project.hasProperty("preview")
+
 android {
     namespace = "com.llarean.walking"
     compileSdk = flutter.compileSdkVersion
@@ -30,9 +35,16 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        manifestPlaceholders["appLabel"] = "@string/app_name"
     }
 
     signingConfigs {
+        create("preview") {
+            storeFile = rootProject.file("../../../.github/preview/preview.keystore")
+            storePassword = "preview"
+            keyAlias = "preview"
+            keyPassword = "preview"
+        }
         if (keystoreProperties.isNotEmpty()) {
             create("release") {
                 storeFile = file(keystoreProperties.getProperty("storeFile"))
@@ -45,8 +57,17 @@ android {
 
     buildTypes {
         release {
-            signingConfig = signingConfigs.findByName("release")
-                ?: signingConfigs.getByName("debug")
+            signingConfig = if (isPreview) {
+                signingConfigs.getByName("preview")
+            } else {
+                signingConfigs.findByName("release")
+                    ?: signingConfigs.getByName("debug")
+            }
+            if (isPreview) {
+                applicationIdSuffix = ".preview"
+                versionNameSuffix = "-preview"
+                manifestPlaceholders["appLabel"] = "@string/app_name_preview"
+            }
         }
     }
 }
