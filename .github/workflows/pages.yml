@@ -1,0 +1,53 @@
+name: Deploy web apps
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - apps/**
+      - packages/**
+      - pages/**
+      - pubspec.yaml
+  workflow_dispatch:
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: pubspec.yaml
+          cache: true
+
+      - name: Build both apps into one site
+        env:
+          BASE: /${{ github.event.repository.name }}
+        run: |
+          mkdir -p _site
+          cp pages/index.html _site/
+          for app in tabata walking; do
+            (cd "apps/$app" && flutter build web --release --base-href "$BASE/$app/")
+            cp -r "apps/$app/build/web" "_site/$app"
+          done
+
+      - uses: actions/upload-pages-artifact@v4
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
