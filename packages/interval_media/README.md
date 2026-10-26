@@ -5,7 +5,7 @@ do not pick up its plugins and permissions.
 
 | Folder | What |
 |---|---|
-| `lib/src/music` | `Playlists` per intensity and `PhaseMusic`, which cross-fades between them as the workout changes pace |
+| `lib/src/music` | `MusicLibrary`, which keeps the user's tracks for each intensity, and `PhaseMusic`, which cross-fades between them as the workout changes pace |
 
 `PhaseMusic` talks to players through the small `TrackPlayer` interface, so
 its fades are tested with fake players and fake time; `JustAudioTrackPlayer`
