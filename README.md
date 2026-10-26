@@ -6,6 +6,8 @@
 No ads, no account, no tracking. Works offline.
 
 [![CI](https://github.com/LLarean/interval-apps/actions/workflows/ci.yml/badge.svg)](https://github.com/LLarean/interval-apps/actions/workflows/ci.yml)
+[![Web](https://github.com/LLarean/interval-apps/actions/workflows/pages.yml/badge.svg)](https://github.com/LLarean/interval-apps/actions/workflows/pages.yml)
+[![Android preview](https://img.shields.io/badge/Android-preview_APK-405D26?logo=android&logoColor=white)](https://github.com/LLarean/interval-apps/releases/tag/preview)
 [![Flutter](https://img.shields.io/badge/Flutter-3.47-02569B?logo=flutter)](https://flutter.dev)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
@@ -94,7 +96,7 @@ The Tabata timer started as a [Unity project](https://github.com/LLarean/tabata-
 
 ## Contributing
 
-Bug reports, ideas and pull requests are welcome — start with [CONTRIBUTING.md](CONTRIBUTING.md).
+Bug reports, ideas and pull requests are welcome — start with [CONTRIBUTING.md](CONTRIBUTING.md). Please follow the [code of conduct](CODE_OF_CONDUCT.md), and report security issues privately as described in [SECURITY.md](SECURITY.md).
 
 ## Credits and license
 
