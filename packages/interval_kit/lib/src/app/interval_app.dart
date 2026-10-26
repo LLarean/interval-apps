@@ -9,6 +9,11 @@ import '../workout/keep_screen_on.dart';
 import '../workout/workout_controller.dart';
 import '../workout/workout_screen.dart';
 
+/// Adds behaviour that follows the workout, such as background music.
+///
+/// Called once, when the app starts; returns a callback that undoes it.
+typedef WorkoutAttachment = VoidCallback Function(WorkoutController workout);
+
 /// The application shell shared by every app.
 ///
 /// It owns the [WorkoutController], follows the [settings] — switching the
@@ -27,6 +32,7 @@ class IntervalApp<S> extends StatefulWidget {
     required this.formatTime,
     required this.settingsBuilder,
     this.keepScreenOn = keepScreenOnWithWakelock,
+    this.attach,
     super.key,
   });
 
@@ -43,6 +49,7 @@ class IntervalApp<S> extends StatefulWidget {
   final String Function(TimerSnapshot snapshot) formatTime;
   final WidgetBuilder settingsBuilder;
   final KeepScreenOn keepScreenOn;
+  final WorkoutAttachment? attach;
 
   @override
   State<IntervalApp<S>> createState() => _IntervalAppState<S>();
@@ -54,11 +61,13 @@ class _IntervalAppState<S> extends State<IntervalApp<S>> {
     cues: widget.cues,
     keepScreenOn: widget.keepScreenOn,
   );
+  VoidCallback? _detach;
 
   @override
   void initState() {
     super.initState();
     widget.settings.addListener(_onSettingsChanged);
+    _detach = widget.attach?.call(_workout);
   }
 
   void _onSettingsChanged() {
@@ -71,6 +80,7 @@ class _IntervalAppState<S> extends State<IntervalApp<S>> {
   @override
   void dispose() {
     widget.settings.removeListener(_onSettingsChanged);
+    _detach?.call();
     _workout.dispose();
     super.dispose();
   }
