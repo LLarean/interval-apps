@@ -1,0 +1,18 @@
+name: Feature request
+description: An idea that would make the apps better.
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: app
+    attributes:
+      label: App
+      options: [Tabata Timer, Japanese Walking, Both]
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What would you like to do?
+      description: Describe the situation, not only the solution.
+    validations:
+      required: true
