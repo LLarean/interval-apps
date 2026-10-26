@@ -14,10 +14,16 @@ permissions:
 
 jobs:
   check:
-    name: Format, analyze and test
+    name: Lint, analyze and test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
+
+      - name: Lint workflows
+        uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color
+
       - uses: subosito/flutter-action@v2
         with:
           flutter-version-file: pubspec.yaml
