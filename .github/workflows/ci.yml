@@ -46,10 +46,26 @@ jobs:
 
       - name: Test
         run: |
-          (cd packages/interval_core && dart test)
+          (cd packages/interval_core && dart run coverage:test_with_coverage)
           for dir in packages/interval_kit packages/interval_media apps/tabata apps/walking; do
-            (cd "$dir" && flutter test)
+            (cd "$dir" && flutter test --coverage)
           done
+
+      - name: Summarize coverage
+        run: |
+          {
+            echo "### Test coverage"
+            echo
+            echo "| Package | Lines |"
+            echo "|---|---|"
+            for report in */*/coverage/lcov.info; do
+              awk -F: -v name="${report%/coverage/lcov.info}" '
+                /^LF:/ { found += $2 }
+                /^LH:/ { hit += $2 }
+                END { printf "| `%s` | %d%% (%d of %d) |\n", name, 100 * hit / found, hit, found }
+              ' "$report"
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
 
   build:
     name: Build ${{ matrix.app }}
