@@ -1,0 +1,39 @@
+# Dart / Flutter
+.dart_tool/
+.packages
+build/
+pubspec_overrides.yaml
+coverage/
+*.g.dart.tmp
+
+# Generated platform files
+**/android/.gradle/
+**/android/local.properties
+**/android/key.properties
+**/android/app/upload-keystore.jks
+**/android/app/.cxx/
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/gradle/wrapper/gradle-wrapper.jar
+**/ios/Flutter/ephemeral/
+**/ios/Pods/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/GeneratedPluginRegistrant.*
+**/flutter_export_environment.sh
+
+# Signing material never belongs in the repository
+*.jks
+*.keystore
+
+# IDE
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+!.vscode/launch.json
+
+# OS
+.DS_Store
+Thumbs.db
