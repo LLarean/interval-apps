@@ -1,0 +1,14 @@
+name: interval_testing
+description: Test helpers shared by the apps. Only ever a dev dependency.
+version: 0.1.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
