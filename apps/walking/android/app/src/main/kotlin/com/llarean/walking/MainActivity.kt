@@ -1,5 +1,7 @@
 package com.llarean.walking
 
-import io.flutter.embedding.android.FlutterActivity
+import com.ryanheise.audioservice.AudioServiceActivity
 
-class MainActivity : FlutterActivity()
+// Shares the Flutter engine with the media service, so the walk keeps
+// running when the screen is off or the app is in the background.
+class MainActivity : AudioServiceActivity()

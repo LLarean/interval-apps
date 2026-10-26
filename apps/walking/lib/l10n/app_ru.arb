@@ -13,5 +13,6 @@
   "musicEmpty": "Будут звучать только сигналы. Добавьте свои треки, чтобы идти под музыку.",
   "musicAdd": "Добавить треки",
   "musicRemove": "Убрать {title}",
-  "musicAddFailed": "Не удалось добавить треки"
+  "musicAddFailed": "Не удалось добавить треки",
+  "notificationRound": "Раунд {round} из {rounds}"
 }

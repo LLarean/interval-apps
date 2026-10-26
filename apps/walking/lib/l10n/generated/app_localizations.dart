@@ -181,6 +181,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Could not add the tracks'**
   String get musicAddFailed;
+
+  /// Second line of the notification shown while walking.
+  ///
+  /// In en, this message translates to:
+  /// **'Round {round} of {rounds}'**
+  String notificationRound(int round, int rounds);
 }
 
 class _AppLocalizationsDelegate

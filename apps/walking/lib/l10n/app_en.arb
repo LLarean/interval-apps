@@ -33,5 +33,10 @@
     "placeholders": { "title": { "type": "String" } }
   },
   "musicAddFailed": "Could not add the tracks",
-  "@musicAddFailed": { "description": "Shown when copying the chosen files failed." }
+  "@musicAddFailed": { "description": "Shown when copying the chosen files failed." },
+  "notificationRound": "Round {round} of {rounds}",
+  "@notificationRound": {
+    "description": "Second line of the notification shown while walking.",
+    "placeholders": { "round": { "type": "int" }, "rounds": { "type": "int" } }
+  }
 }

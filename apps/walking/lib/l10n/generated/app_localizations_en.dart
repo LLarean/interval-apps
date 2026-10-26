@@ -62,4 +62,9 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get musicAddFailed => 'Could not add the tracks';
+
+  @override
+  String notificationRound(int round, int rounds) {
+    return 'Round $round of $rounds';
+  }
 }

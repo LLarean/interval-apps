@@ -82,4 +82,32 @@ void main() {
     await tester.tap(find.text('STOP'));
     await tester.pumpAndSettle();
   });
+
+  testWidgets('describes the walk in the notification', (tester) async {
+    final session = WorkoutMediaSession();
+    await tester.pumpWidget(
+      WalkingApp(
+        settings: ValueNotifier(
+          const WalkingSettings(language: AppLanguage.russian),
+        ),
+        cues: const SilentCuePlayer(),
+        version: '1.2.3',
+        keepScreenOn: ({required enabled}) async {},
+        session: session,
+      ),
+    );
+
+    await tester.tap(find.text('СТАРТ'));
+    await tester.pump();
+    expect(session.mediaItem.value?.title, 'Приготовьтесь');
+    expect(session.mediaItem.value?.artist, 'Раунд 1 из 5');
+
+    await tester.pump(WalkingSettings.prepare + const Duration(minutes: 3));
+    expect(session.mediaItem.value?.title, 'Медленный темп');
+    expect(session.playbackState.value.playing, isTrue);
+
+    await tester.tap(find.text('СТОП'));
+    await tester.pumpAndSettle();
+    expect(session.playbackState.value.playing, isFalse);
+  });
 }

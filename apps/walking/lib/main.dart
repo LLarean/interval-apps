@@ -6,6 +6,7 @@ import 'package:interval_kit/interval_kit.dart';
 import 'package:interval_media/interval_media.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
+import 'l10n/generated/app_localizations.dart';
 import 'src/app.dart';
 import 'src/settings/settings_store.dart';
 
@@ -27,12 +28,22 @@ Future<void> main() async {
   );
   settings.addListener(() => unawaited(store.save(settings.value)));
 
+  // The web version runs only while its tab is open anyway.
+  final session = kIsWeb
+      ? null
+      : await WorkoutMediaSession.start(
+          channelName: lookupAppLocalizations(settings.value.language.locale)
+              .appTitle,
+          notificationIcon: 'drawable/ic_stat_walk',
+        );
+
   runApp(
     WalkingApp(
       settings: settings,
       cues: cues,
       version: packageInfo.version,
       music: music,
+      session: session,
     ),
   );
 }
