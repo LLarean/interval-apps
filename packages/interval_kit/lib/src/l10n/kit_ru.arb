@@ -1,0 +1,11 @@
+{
+  "@@locale": "ru",
+  "start": "Старт",
+  "stop": "Стоп",
+  "reset": "Сбросить",
+  "paused": "Пауза",
+  "settings": "Настройки",
+  "language": "Язык",
+  "decrease": "Уменьшить",
+  "increase": "Увеличить"
+}

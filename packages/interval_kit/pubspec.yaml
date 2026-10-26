@@ -1,0 +1,37 @@
+name: interval_kit
+description: Flutter building blocks shared by the apps — theme, widgets, sound cues and the workout controller.
+version: 0.1.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  audioplayers: ^6.8.1
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  interval_core:
+    path: ../interval_core
+  intl: ^0.20.3
+  wakelock_plus: ^1.8.2
+
+dev_dependencies:
+  fake_async: ^1.3.3
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  generate: true
+  assets:
+    - assets/sounds/
+  fonts:
+    - family: Ubuntu
+      fonts:
+        - asset: assets/fonts/Ubuntu-R.ttf
+        - asset: assets/fonts/Ubuntu-M.ttf
+          weight: 500
+        - asset: assets/fonts/Ubuntu-B.ttf
+          weight: 700

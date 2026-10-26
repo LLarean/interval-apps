@@ -1,0 +1,19 @@
+{
+  "@@locale": "en",
+  "start": "Start",
+  "@start": { "description": "Starts or resumes the workout." },
+  "stop": "Stop",
+  "@stop": { "description": "Pauses the running workout." },
+  "reset": "Reset",
+  "@reset": { "description": "Returns the workout to its beginning." },
+  "paused": "Pause",
+  "@paused": { "description": "Status shown while the workout is paused." },
+  "settings": "Settings",
+  "@settings": { "description": "Title of the settings screen and its button." },
+  "language": "Language",
+  "@language": { "description": "Label of the language setting." },
+  "decrease": "Decrease",
+  "@decrease": { "description": "Screen-reader label of a minus button." },
+  "increase": "Increase",
+  "@increase": { "description": "Screen-reader label of a plus button." }
+}
