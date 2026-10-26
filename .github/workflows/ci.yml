@@ -64,9 +64,10 @@ jobs:
           flutter-version-file: pubspec.yaml
           cache: true
 
+      # Phones only: x86_64 would add a third to the size, for emulators.
       - name: Build preview APK
         run: |
-          flutter build apk --release -P preview=true
+          flutter build apk --release -P preview=true             --target-platform android-arm,android-arm64
           mv build/app/outputs/flutter-apk/app-release.apk ${{ matrix.app }}-preview.apk
       - name: Build web
         run: flutter build web --release
