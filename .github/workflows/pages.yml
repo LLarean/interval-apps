@@ -40,7 +40,7 @@ jobs:
             cp -r "apps/$app/build/web" "_site/$app"
           done
 
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
 
   deploy:
     needs: build
