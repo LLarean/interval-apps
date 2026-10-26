@@ -128,7 +128,7 @@ jobs:
           They install as separate apps — *Tabata Preview* and *Walking Preview* — next to the store versions, and each new preview updates the previous one. They are signed with a public test key: never upload them to a store.
           NOTES
           gh release delete preview --yes --cleanup-tag || true
-          gh release create preview *-preview.apk \
+          gh release create preview ./*-preview.apk \
             --prerelease \
             --target "$GITHUB_SHA" \
             --title "Preview builds" \
