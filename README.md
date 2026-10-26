@@ -19,8 +19,8 @@ No ads, no account, no tracking. Works offline.
 
 | | App | What it does | Try it |
 |---|---|---|---|
-| <img src="apps/tabata/assets/icon/icon.png" width="48" alt=""> | **[Tabata Timer](apps/tabata)** | The classic protocol — 20 s of work, 10 s of rest, 8 rounds — with every number adjustable. | [Web](https://llarean.github.io/interval-apps/tabata/) · [RuStore](https://www.rustore.ru/catalog/app/com.LLarean.TabataTimer) |
-| <img src="apps/walking/assets/icon/icon.png" width="48" alt=""> | **[Japanese Walking](apps/walking)** | Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute session. | [Web](https://llarean.github.io/interval-apps/walking/) |
+| <img src="apps/tabata/assets/icon/icon.png" width="48" alt=""> | **[Tabata Timer](apps/tabata)** | The classic protocol — 20 s of work, 10 s of rest, 8 rounds — with every number adjustable. | [Web](https://llarean.org/interval-apps/tabata/) · [RuStore](https://www.rustore.ru/catalog/app/com.LLarean.TabataTimer) |
+| <img src="apps/walking/assets/icon/icon.png" width="48" alt=""> | **[Japanese Walking](apps/walking)** | Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute session. | [Web](https://llarean.org/interval-apps/walking/) |
 
 Both apps speak English and Russian, play a sound when the phase changes and keep the screen on while the timer runs.
 
