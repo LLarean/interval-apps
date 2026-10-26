@@ -60,7 +60,7 @@ jobs:
           cp build/app/outputs/flutter-apk/app-release.apk "$GITHUB_WORKSPACE/$GITHUB_REF_NAME.apk"
           cp build/app/outputs/bundle/release/app-release.aab "$GITHUB_WORKSPACE/$GITHUB_REF_NAME.aab"
 
-      - uses: softprops/action-gh-release@v2
+      - uses: softprops/action-gh-release@v3
         with:
           files: |
             ${{ github.ref_name }}.apk
