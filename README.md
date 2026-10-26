@@ -9,9 +9,10 @@ No ads, no account, no tracking. Works offline.
 [![Flutter](https://img.shields.io/badge/Flutter-3.47-02569B?logo=flutter)](https://flutter.dev)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-<img src="docs/images/tabata-timer.png" width="240" alt="Tabata timer during a work interval">&nbsp;&nbsp;
-<img src="docs/images/tabata-settings.png" width="240" alt="Tabata settings">&nbsp;&nbsp;
-<img src="docs/images/walking-timer.png" width="240" alt="Japanese walking timer at a fast pace">
+<img src="docs/images/tabata-timer.png" width="200" alt="Tabata timer during a work interval">&nbsp;&nbsp;
+<img src="docs/images/tabata-settings.png" width="200" alt="Tabata settings">&nbsp;&nbsp;
+<img src="docs/images/walking-timer.png" width="200" alt="Japanese walking timer at a fast pace">&nbsp;&nbsp;
+<img src="docs/images/walking-music.png" width="200" alt="Japanese walking playlist for the fast pace">
 
 </div>
 
@@ -20,7 +21,7 @@ No ads, no account, no tracking. Works offline.
 | | App | What it does | Try it |
 |---|---|---|---|
 | <img src="apps/tabata/assets/icon/icon.png" width="48" alt=""> | **[Tabata Timer](apps/tabata)** | The classic protocol — 20 s of work, 10 s of rest, 8 rounds — with every number adjustable. | [Web](https://llarean.org/interval-apps/tabata/) · [RuStore](https://www.rustore.ru/catalog/app/com.LLarean.TabataTimer) |
-| <img src="apps/walking/assets/icon/icon.png" width="48" alt=""> | **[Japanese Walking](apps/walking)** | Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute session. | [Web](https://llarean.org/interval-apps/walking/) |
+| <img src="apps/walking/assets/icon/icon.png" width="48" alt=""> | **[Japanese Walking](apps/walking)** | Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute session. On Android, plays your own music for each pace and keeps going with the screen off. | [Web](https://llarean.org/interval-apps/walking/) |
 
 Both apps speak English and Russian, play a sound when the phase changes and keep the screen on while the timer runs.
 
@@ -32,7 +33,8 @@ The two apps are separate products with their own store listings, but they share
 flowchart LR
   core["interval_core<br><sub>pure Dart engine</sub>"] --> kit["interval_kit<br><sub>theme · widgets · cues · app shell</sub>"]
   kit --> tabata["apps/tabata"]
-  kit --> walking["apps/walking"]
+  kit --> media["interval_media<br><sub>music · media session</sub>"]
+  media --> walking["apps/walking"]
   testing["interval_testing<br><sub>test helpers</sub>"] -.-> tabata
   testing -.-> walking
 ```
@@ -41,9 +43,10 @@ flowchart LR
 |---|---|
 | [`packages/interval_core`](packages/interval_core) | The workout engine: plans, phases and a timer that never drifts. Pure Dart, no Flutter. |
 | [`packages/interval_kit`](packages/interval_kit) | Everything the apps share on screen: theme, widgets, sound cues, the workout screen and the app shell. |
+| [`packages/interval_media`](packages/interval_media) | Music per pace with cross-fades, and the media session that keeps a workout running with the screen off. Only the walking app uses it. |
 | [`packages/interval_testing`](packages/interval_testing) | Helpers for widget tests and README screenshots. |
 | [`apps/tabata`](apps/tabata) | The Tabata timer. Settings and phase names only. |
-| [`apps/walking`](apps/walking) | The Japanese walking timer. Settings and phase names only. |
+| [`apps/walking`](apps/walking) | The Japanese walking timer. Settings, phase names and the music screens. |
 
 A fix in the engine or a widget lands in both apps with the next build. Read more in [the architecture notes](docs/ARCHITECTURE.md).
 
@@ -79,8 +82,8 @@ CI runs the same checks on every pull request; see [CONTRIBUTING.md](CONTRIBUTIN
 - [x] Tabata timer ported from Unity, with the original look
 - [x] Japanese walking timer with sound cues
 - [x] Web versions on GitHub Pages
-- [ ] Walking: separate playlists for fast and slow intervals from the user's own music, cross-faded at every phase change
-- [ ] Walking: keep running with the screen off (foreground service, lock-screen controls)
+- [x] Walking: separate playlists for fast and slow intervals from the user's own music, cross-faded at every phase change
+- [x] Walking: keep running with the screen off (foreground service, lock-screen controls)
 - [ ] Voice announcements as an alternative to sounds
 - [ ] iOS builds
 
