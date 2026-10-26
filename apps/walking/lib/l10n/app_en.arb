@@ -1,0 +1,17 @@
+{
+  "@@locale": "en",
+  "appTitle": "Japanese Walking",
+  "@appTitle": { "description": "Application name." },
+  "phasePrepare": "Get ready",
+  "@phasePrepare": { "description": "Status during the countdown before the walk." },
+  "phaseFast": "Fast pace",
+  "@phaseFast": { "description": "Status while walking briskly." },
+  "phaseSlow": "Slow pace",
+  "@phaseSlow": { "description": "Status while walking at a relaxed pace." },
+  "settingRounds": "Rounds",
+  "@settingRounds": { "description": "Label of the number of fast + slow rounds setting." },
+  "settingFast": "Fast, min",
+  "@settingFast": { "description": "Label of the fast interval length setting, in minutes." },
+  "settingSlow": "Slow, min",
+  "@settingSlow": { "description": "Label of the slow interval length setting, in minutes." }
+}

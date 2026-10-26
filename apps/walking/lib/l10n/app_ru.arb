@@ -1,0 +1,10 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Японская ходьба",
+  "phasePrepare": "Приготовьтесь",
+  "phaseFast": "Быстрый темп",
+  "phaseSlow": "Медленный темп",
+  "settingRounds": "Раунды",
+  "settingFast": "Быстро, мин",
+  "settingSlow": "Медленно, мин"
+}
