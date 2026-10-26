@@ -39,9 +39,14 @@ final class JustAudioTrackPlayer implements TrackPlayer {
     ], preload: false);
   }
 
-  // just_audio's play() completes only when playback stops.
+  // just_audio's play() completes only when playback stops, so it is not
+  // awaited; a track that fails to load must not become an uncaught error.
   @override
-  Future<void> play() async => unawaited(_player.play());
+  Future<void> play() async => unawaited(
+    _player.play().catchError(
+      (Object error) => debugPrint('Music player error: $error'),
+    ),
+  );
 
   @override
   Future<void> pause() => _player.pause();
