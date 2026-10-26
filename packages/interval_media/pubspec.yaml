@@ -1,0 +1,21 @@
+name: interval_media
+description: Music and media-session support for the interval apps — playlists per intensity, cross-fades and running with the screen off.
+version: 0.1.0
+publish_to: none
+resolution: workspace
+
+environment:
+  sdk: ^3.13.0
+
+dependencies:
+  audio_session: ^0.2.4
+  flutter:
+    sdk: flutter
+  interval_kit:
+    path: ../interval_kit
+  just_audio: ^0.10.6
+
+dev_dependencies:
+  fake_async: ^1.3.3
+  flutter_test:
+    sdk: flutter

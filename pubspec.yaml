@@ -10,6 +10,7 @@ environment:
 workspace:
   - packages/interval_core
   - packages/interval_kit
+  - packages/interval_media
   - packages/interval_testing
   - apps/tabata
   - apps/walking

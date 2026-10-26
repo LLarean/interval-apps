@@ -39,7 +39,7 @@ jobs:
       - name: Test
         run: |
           (cd packages/interval_core && dart test)
-          for dir in packages/interval_kit apps/tabata apps/walking; do
+          for dir in packages/interval_kit packages/interval_media apps/tabata apps/walking; do
             (cd "$dir" && flutter test)
           done
 
