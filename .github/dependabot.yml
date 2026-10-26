@@ -6,9 +6,15 @@ updates:
       interval: monthly
     commit-message:
       prefix: ci
+    groups:
+      actions:
+        patterns: ["*"]
   - package-ecosystem: pub
     directory: /
     schedule:
       interval: monthly
     commit-message:
       prefix: build
+    groups:
+      pub:
+        patterns: ["*"]
