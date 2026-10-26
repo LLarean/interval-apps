@@ -85,7 +85,6 @@ CI runs the same checks on every pull request; see [CONTRIBUTING.md](CONTRIBUTIN
 - [x] Walking: separate playlists for fast and slow intervals from the user's own music, cross-faded at every phase change
 - [x] Walking: keep running with the screen off (foreground service, lock-screen controls)
 - [ ] Voice announcements as an alternative to sounds
-- [ ] iOS builds
 
 ## History
 
