@@ -4,6 +4,8 @@ publish_to: none
 
 environment:
   sdk: ^3.13.0
+  # The exact Flutter release CI uses; bump it deliberately.
+  flutter: 3.47.8
 
 workspace:
   - packages/interval_core
