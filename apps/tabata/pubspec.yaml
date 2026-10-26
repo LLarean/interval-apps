@@ -19,9 +19,21 @@ dependencies:
   shared_preferences: ^2.5.6
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.4
   flutter_test:
     sdk: flutter
 
 flutter:
   generate: true
   uses-material-design: true
+
+# Regenerate with: dart run flutter_launcher_icons
+flutter_launcher_icons:
+  image_path: assets/icon/icon.png
+  android: true
+  adaptive_icon_background: "#F4EFEB"
+  adaptive_icon_foreground: assets/icon/foreground.png
+  web:
+    generate: true
+    background_color: "#F4EFEB"
+    theme_color: "#405D26"
