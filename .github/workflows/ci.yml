@@ -19,10 +19,11 @@ jobs:
     steps:
       - uses: actions/checkout@v7
 
+      # Problems show up as annotations on the offending lines.
       - name: Lint workflows
-        uses: docker://rhysd/actionlint:1.7.12
-        with:
-          args: -color
+        run: |
+          docker run --rm -v "$PWD:/repo" -w /repo rhysd/actionlint:1.7.12 \
+            -format '{{range $err := .}}::error file={{$err.Filepath}},line={{$err.Line}},col={{$err.Column}}::{{$err.Message}}{{"\n"}}{{end}}'
 
       - uses: subosito/flutter-action@v2
         with:
