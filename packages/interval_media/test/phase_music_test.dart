@@ -21,8 +21,8 @@ void main() {
     void Function(
       FakeAsync async,
       WorkoutController workout,
-      FakeTrackPlayer fast,
-      FakeTrackPlayer slow,
+      RecordingTrackPlayer fast,
+      RecordingTrackPlayer slow,
       ValueNotifier<Playlists> playlists,
     )
     body, {
@@ -40,12 +40,12 @@ void main() {
                 .withTracks(Intensity.high, fastTracks)
                 .withTracks(Intensity.low, slowTracks),
       );
-      final players = <FakeTrackPlayer>[];
+      final players = <RecordingTrackPlayer>[];
       final music = PhaseMusic(
         workout: workout,
         playlists: playlists,
         createPlayer: () {
-          final player = FakeTrackPlayer();
+          final player = RecordingTrackPlayer();
           players.add(player);
           return player;
         },
@@ -178,42 +178,9 @@ void main() {
   });
 
   test('releases the players', () {
-    late FakeTrackPlayer fastPlayer;
+    late RecordingTrackPlayer fastPlayer;
     withMusic((async, _, fast, _, _) => fastPlayer = fast);
 
     expect(fastPlayer.disposed, isTrue);
   });
-}
-
-/// Records what [PhaseMusic] asks of a player.
-final class FakeTrackPlayer implements TrackPlayer {
-  var tracks = const <Track>[];
-  var trackChanges = 0;
-  var playing = false;
-  var plays = 0;
-  var disposed = false;
-  final volumes = <double>[];
-
-  double get volume => volumes.isEmpty ? 1 : volumes.last;
-
-  @override
-  Future<void> setTracks(List<Track> tracks) async {
-    this.tracks = tracks;
-    trackChanges++;
-  }
-
-  @override
-  Future<void> play() async {
-    playing = true;
-    plays++;
-  }
-
-  @override
-  Future<void> pause() async => playing = false;
-
-  @override
-  Future<void> setVolume(double volume) async => volumes.add(volume);
-
-  @override
-  Future<void> dispose() async => disposed = true;
 }
