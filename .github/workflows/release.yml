@@ -1,0 +1,68 @@
+# Publishes a signed build when an app is tagged, e.g. `tabata-v1.1.0`.
+#
+# Required repository secrets (see CONTRIBUTING.md):
+#   ANDROID_KEYSTORE_BASE64, ANDROID_KEYSTORE_PASSWORD,
+#   ANDROID_KEY_ALIAS, ANDROID_KEY_PASSWORD
+name: Release
+
+on:
+  push:
+    tags:
+      - tabata-v*
+      - walking-v*
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Read the app from the tag
+        id: tag
+        run: |
+          app="${GITHUB_REF_NAME%%-v*}"
+          echo "app=$app" >> "$GITHUB_OUTPUT"
+          echo "dir=apps/$app" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version-file: pubspec.yaml
+          cache: true
+
+      - name: Install the signing key
+        working-directory: ${{ steps.tag.outputs.dir }}/android
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+        run: |
+          echo "$KEYSTORE_BASE64" | base64 --decode > app/upload-keystore.jks
+          cat > key.properties <<PROPERTIES
+          storeFile=upload-keystore.jks
+          storePassword=$STORE_PASSWORD
+          keyAlias=$KEY_ALIAS
+          keyPassword=$KEY_PASSWORD
+          PROPERTIES
+
+      - name: Build
+        working-directory: ${{ steps.tag.outputs.dir }}
+        run: |
+          flutter build apk --release
+          flutter build appbundle --release
+          cp build/app/outputs/flutter-apk/app-release.apk "$GITHUB_WORKSPACE/$GITHUB_REF_NAME.apk"
+          cp build/app/outputs/bundle/release/app-release.aab "$GITHUB_WORKSPACE/$GITHUB_REF_NAME.aab"
+
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            ${{ github.ref_name }}.apk
+            ${{ github.ref_name }}.aab
+          generate_release_notes: true
