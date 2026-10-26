@@ -80,6 +80,7 @@ class _IntervalAppState<S> extends State<IntervalApp<S>> {
     return ValueListenableBuilder(
       valueListenable: widget.settings,
       builder: (context, settings, _) => MaterialApp(
+        debugShowCheckedModeBanner: false,
         onGenerateTitle: widget.onGenerateTitle,
         theme: buildIntervalTheme(),
         locale: widget.languageOf(settings).locale,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../theme/interval_colors.dart';
+
 /// The shell of a settings screen: back button, title and a scrolling list.
 class SettingsPage extends StatelessWidget {
   const SettingsPage({
@@ -25,7 +27,12 @@ class SettingsPage extends StatelessWidget {
         backgroundColor: Colors.transparent,
         surfaceTintColor: Colors.transparent,
         toolbarHeight: 72,
-        leading: const BackButton(),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new),
+          color: IntervalColors.muted,
+          tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+          onPressed: () => Navigator.of(context).maybePop(),
+        ),
       ),
       body: SafeArea(
         top: false,
@@ -38,7 +45,13 @@ class SettingsPage extends StatelessWidget {
                 child: Center(child: child),
               ),
             if (footer case final footer?)
-              Align(alignment: Alignment.centerRight, child: footer),
+              Align(
+                alignment: Alignment.centerRight,
+                child: DefaultTextStyle.merge(
+                  style: const TextStyle(color: IntervalColors.muted),
+                  child: footer,
+                ),
+              ),
           ],
         ),
       ),
