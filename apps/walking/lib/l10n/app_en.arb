@@ -13,5 +13,25 @@
   "settingFast": "Fast, min",
   "@settingFast": { "description": "Label of the fast interval length setting, in minutes." },
   "settingSlow": "Slow, min",
-  "@settingSlow": { "description": "Label of the slow interval length setting, in minutes." }
+  "@settingSlow": { "description": "Label of the slow interval length setting, in minutes." },
+  "settingMusicFast": "Fast pace music",
+  "@settingMusicFast": { "description": "Label of the link to the playlist played while walking fast." },
+  "settingMusicSlow": "Slow pace music",
+  "@settingMusicSlow": { "description": "Label of the link to the playlist played while walking slowly." },
+  "musicTrackCount": "{count, plural, =0{No music} =1{1 track} other{{count} tracks}}",
+  "@musicTrackCount": {
+    "description": "How many tracks a playlist has.",
+    "placeholders": { "count": { "type": "int" } }
+  },
+  "musicEmpty": "Only the sounds will play. Add your own tracks to walk to music.",
+  "@musicEmpty": { "description": "Shown in place of an empty playlist." },
+  "musicAdd": "Add tracks",
+  "@musicAdd": { "description": "Button that opens the file picker to add tracks to the playlist." },
+  "musicRemove": "Remove {title}",
+  "@musicRemove": {
+    "description": "Screen-reader label of the button that removes a track from the playlist.",
+    "placeholders": { "title": { "type": "String" } }
+  },
+  "musicAddFailed": "Could not add the tracks",
+  "@musicAddFailed": { "description": "Shown when copying the chosen files failed." }
 }

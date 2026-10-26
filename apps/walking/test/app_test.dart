@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:interval_kit/interval_kit.dart';
+import 'package:interval_media/interval_media.dart';
 import 'package:walking/src/app.dart';
 import 'package:walking/src/settings/walking_settings.dart';
 
@@ -36,6 +39,47 @@ void main() {
     expect(find.text('1/5'), findsOneWidget);
 
     await tester.tap(find.text('СТОП'));
+    await tester.pumpAndSettle();
+  });
+
+  testWidgets('plays the fast playlist while walking fast', (tester) async {
+    final root = Directory.systemTemp.createTempSync('walking_app_');
+    addTearDown(() => root.deleteSync(recursive: true));
+    final music = (await tester.runAsync(() async {
+      final music = await MusicLibrary.open(root: root);
+      await music.add(Intensity.high, [
+        (name: 'fast.mp3', read: () => Stream.value(const [0])),
+      ]);
+      return music;
+    }))!;
+    final players = <RecordingTrackPlayer>[];
+
+    await tester.pumpWidget(
+      WalkingApp(
+        settings: ValueNotifier(
+          const WalkingSettings(language: AppLanguage.english),
+        ),
+        cues: const SilentCuePlayer(),
+        version: '1.2.3',
+        keepScreenOn: ({required enabled}) async {},
+        music: music,
+        createPlayer: () {
+          final player = RecordingTrackPlayer();
+          players.add(player);
+          return player;
+        },
+      ),
+    );
+    await tester.tap(find.text('START'));
+    await tester.pump(WalkingSettings.prepare + const Duration(seconds: 5));
+
+    final [fast, slow] = players;
+    expect(fast.tracks.single.title, 'fast');
+    expect(fast.playing, isTrue);
+    expect(fast.volume, 1);
+    expect(slow.playing, isFalse);
+
+    await tester.tap(find.text('STOP'));
     await tester.pumpAndSettle();
   });
 }

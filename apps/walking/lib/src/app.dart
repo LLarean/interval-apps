@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:interval_kit/interval_kit.dart';
+import 'package:interval_media/interval_media.dart';
 
 import '../l10n/generated/app_localizations.dart';
 import 'settings/settings_screen.dart';
@@ -11,6 +12,8 @@ class WalkingApp extends StatelessWidget {
     required this.cues,
     required this.version,
     this.keepScreenOn = keepScreenOnWithWakelock,
+    this.music,
+    this.createPlayer = JustAudioTrackPlayer.new,
     super.key,
   });
 
@@ -18,6 +21,10 @@ class WalkingApp extends StatelessWidget {
   final CuePlayer cues;
   final String version;
   final KeepScreenOn keepScreenOn;
+
+  /// The user's playlists, or `null` where music is not supported.
+  final MusicLibrary? music;
+  final TrackPlayer Function() createPlayer;
 
   @override
   Widget build(BuildContext context) {
@@ -33,8 +40,19 @@ class WalkingApp extends StatelessWidget {
       phaseLabel: _phaseLabel,
       formatTime: _formatTime,
       settingsBuilder: (_) =>
-          SettingsScreen(settings: settings, version: version),
+          SettingsScreen(settings: settings, version: version, music: music),
+      attach: _attachMusic,
     );
+  }
+
+  VoidCallback _attachMusic(WorkoutController workout) {
+    final music = this.music;
+    if (music == null) return () {};
+    return PhaseMusic(
+      workout: workout,
+      playlists: music,
+      createPlayer: createPlayer,
+    ).dispose;
   }
 
   /// `m:ss`, e.g. `2:59`.

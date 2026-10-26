@@ -139,6 +139,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Slow, min'**
   String get settingSlow;
+
+  /// Label of the link to the playlist played while walking fast.
+  ///
+  /// In en, this message translates to:
+  /// **'Fast pace music'**
+  String get settingMusicFast;
+
+  /// Label of the link to the playlist played while walking slowly.
+  ///
+  /// In en, this message translates to:
+  /// **'Slow pace music'**
+  String get settingMusicSlow;
+
+  /// How many tracks a playlist has.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =0{No music} =1{1 track} other{{count} tracks}}'**
+  String musicTrackCount(int count);
+
+  /// Shown in place of an empty playlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Only the sounds will play. Add your own tracks to walk to music.'**
+  String get musicEmpty;
+
+  /// Button that opens the file picker to add tracks to the playlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Add tracks'**
+  String get musicAdd;
+
+  /// Screen-reader label of the button that removes a track from the playlist.
+  ///
+  /// In en, this message translates to:
+  /// **'Remove {title}'**
+  String musicRemove(String title);
+
+  /// Shown when copying the chosen files failed.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not add the tracks'**
+  String get musicAddFailed;
 }
 
 class _AppLocalizationsDelegate
