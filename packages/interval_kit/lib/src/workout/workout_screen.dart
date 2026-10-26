@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:interval_core/interval_core.dart';
 
@@ -31,31 +33,30 @@ class WorkoutScreen extends StatelessWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: ListenableBuilder(
-          listenable: controller,
-          builder: (context, _) {
-            final snapshot = controller.snapshot;
-            final running = controller.isRunning;
-            final status = controller.status == TimerStatus.paused
-                ? l10n.paused
-                : phaseLabel(context, snapshot.phase);
+        child: LayoutBuilder(
+          builder: (context, constraints) => ListenableBuilder(
+            listenable: controller,
+            builder: (context, _) {
+              final snapshot = controller.snapshot;
+              final running = controller.isRunning;
+              final status = controller.status == TimerStatus.paused
+                  ? l10n.paused
+                  : phaseLabel(context, snapshot.phase);
 
-            return Column(
-              children: [
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    icon: const Icon(Icons.settings_outlined),
-                    tooltip: l10n.settings,
-                    padding: const EdgeInsets.all(16),
-                    onPressed: onOpenSettings,
+              return Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      icon: const Icon(Icons.settings_outlined),
+                      tooltip: l10n.settings,
+                      padding: const EdgeInsets.all(16),
+                      onPressed: onOpenSettings,
+                    ),
                   ),
-                ),
-                const Spacer(),
-                ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 320),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 48),
+                  const Spacer(),
+                  SizedBox.square(
+                    dimension: _ringDiameter(constraints),
                     child: TimerFace(
                       time: formatTime(snapshot),
                       caption:
@@ -69,28 +70,37 @@ class WorkoutScreen extends StatelessWidget {
                       drainOver: running ? snapshot.remainingInPhase : null,
                     ),
                   ),
-                ),
-                const SizedBox(height: 24),
-                Semantics(
-                  liveRegion: true,
-                  child: Text(
-                    status.toUpperCase(),
-                    style: textTheme.titleLarge,
+                  const SizedBox(height: 24),
+                  Semantics(
+                    liveRegion: true,
+                    child: Text(
+                      status.toUpperCase(),
+                      style: textTheme.titleLarge,
+                    ),
                   ),
-                ),
-                const Spacer(flex: 2),
-                PillButton(
-                  label: running ? l10n.stop : l10n.start,
-                  onPressed: controller.toggle,
-                ),
-                const Spacer(),
-                FlatTextButton(label: l10n.reset, onPressed: controller.reset),
-                const SizedBox(height: 32),
-              ],
-            );
-          },
+                  const Spacer(flex: 2),
+                  PillButton(
+                    label: running ? l10n.stop : l10n.start,
+                    onPressed: controller.toggle,
+                  ),
+                  const Spacer(),
+                  FlatTextButton(
+                    label: l10n.reset,
+                    onPressed: controller.reset,
+                  ),
+                  const SizedBox(height: 32),
+                ],
+              );
+            },
+          ),
         ),
       ),
     );
   }
+
+  /// Large on a phone held upright, but never crowding out the buttons.
+  static double _ringDiameter(BoxConstraints constraints) => math.min(
+    400,
+    math.min(constraints.maxWidth * 0.7, constraints.maxHeight * 0.45),
+  );
 }
