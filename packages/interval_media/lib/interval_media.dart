@@ -5,3 +5,4 @@ export 'src/music/music_library.dart';
 export 'src/music/phase_music.dart';
 export 'src/music/playlists.dart';
 export 'src/music/track_player.dart';
+export 'src/session/workout_media_session.dart';
