@@ -70,6 +70,17 @@ engine`, `fix(kit): scale the countdown ring with the screen`.
 
 ## Releases
 
+### Preview builds
+
+Every push to `main` replaces the
+[`preview` release](https://github.com/LLarean/interval-apps/releases/tag/preview)
+with fresh APKs of both apps, for testers. They are built with
+`flutter build apk -P preview=true`, which adds `.preview` to the application
+id and "Preview" to the name, and signs them with the public key in
+[`.github/preview`](.github/preview). They never go to a store.
+
+### Store releases
+
 Each app is released on its own, from a tag named after it:
 
 ```sh

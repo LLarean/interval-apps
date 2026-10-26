@@ -64,13 +64,46 @@ jobs:
           flutter-version-file: pubspec.yaml
           cache: true
 
-      - name: Build APK
-        run: flutter build apk --release
+      - name: Build preview APK
+        run: |
+          flutter build apk --release -P preview=true
+          mv build/app/outputs/flutter-apk/app-release.apk ${{ matrix.app }}-preview.apk
       - name: Build web
         run: flutter build web --release
 
       - uses: actions/upload-artifact@v7
         with:
           name: ${{ matrix.app }}-apk
-          path: apps/${{ matrix.app }}/build/app/outputs/flutter-apk/app-release.apk
+          path: apps/${{ matrix.app }}/${{ matrix.app }}-preview.apk
           retention-days: 14
+
+  preview:
+    name: Publish preview builds
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          pattern: '*-apk'
+          merge-multiple: true
+
+      # One release, replaced on every push, so the download links never change.
+      - name: Replace the preview release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          cat > notes.md <<NOTES
+          Test builds of \`main\` at $GITHUB_SHA, for trying the apps before a store release.
+
+          They install as separate apps — *Tabata Preview* and *Walking Preview* — next to the store versions, and each new preview updates the previous one. They are signed with a public test key: never upload them to a store.
+          NOTES
+          gh release delete preview --yes --cleanup-tag || true
+          gh release create preview *-preview.apk \
+            --prerelease \
+            --target "$GITHUB_SHA" \
+            --title "Preview builds" \
+            --notes-file notes.md

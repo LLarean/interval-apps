@@ -20,10 +20,12 @@ No ads, no account, no tracking. Works offline.
 
 | | App | What it does | Try it |
 |---|---|---|---|
-| <img src="apps/tabata/assets/icon/icon.png" width="48" alt=""> | **[Tabata Timer](apps/tabata)** | The classic protocol — 20 s of work, 10 s of rest, 8 rounds — with every number adjustable. | [Web](https://llarean.org/interval-apps/tabata/) · [RuStore](https://www.rustore.ru/catalog/app/com.LLarean.TabataTimer) |
-| <img src="apps/walking/assets/icon/icon.png" width="48" alt=""> | **[Japanese Walking](apps/walking)** | Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute session. On Android, plays your own music for each pace and keeps going with the screen off. | [Web](https://llarean.org/interval-apps/walking/) |
+| <img src="apps/tabata/assets/icon/icon.png" width="48" alt=""> | **[Tabata Timer](apps/tabata)** | The classic protocol — 20 s of work, 10 s of rest, 8 rounds — with every number adjustable. | [Web](https://llarean.org/interval-apps/tabata/) · [APK preview](https://github.com/LLarean/interval-apps/releases/download/preview/tabata-preview.apk) · [RuStore](https://www.rustore.ru/catalog/app/com.LLarean.TabataTimer) |
+| <img src="apps/walking/assets/icon/icon.png" width="48" alt=""> | **[Japanese Walking](apps/walking)** | Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute session. On Android, plays your own music for each pace and keeps going with the screen off. | [Web](https://llarean.org/interval-apps/walking/) · [APK preview](https://github.com/LLarean/interval-apps/releases/download/preview/walking-preview.apk) |
 
 Both apps speak English and Russian, play a sound when the phase changes and keep the screen on while the timer runs.
+
+*APK preview* links point to [test builds of the latest `main`](https://github.com/LLarean/interval-apps/releases/tag/preview). They install next to the store versions as separate "Preview" apps and update each other.
 
 ## Why a monorepo
 
