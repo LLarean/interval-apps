@@ -1,0 +1,10 @@
+{
+  "@@locale": "ru",
+  "appTitle": "Табата таймер",
+  "phasePrepare": "Подготовка",
+  "phaseWork": "Работа",
+  "phaseRest": "Отдых",
+  "settingRounds": "Раунды",
+  "settingWork": "Работа, сек",
+  "settingRest": "Отдых, сек"
+}

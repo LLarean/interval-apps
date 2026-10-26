@@ -1,0 +1,17 @@
+{
+  "@@locale": "en",
+  "appTitle": "Tabata Timer",
+  "@appTitle": { "description": "Application name." },
+  "phasePrepare": "Get ready",
+  "@phasePrepare": { "description": "Status during the countdown before the first round." },
+  "phaseWork": "Work",
+  "@phaseWork": { "description": "Status during a work interval." },
+  "phaseRest": "Rest",
+  "@phaseRest": { "description": "Status during a rest interval." },
+  "settingRounds": "Rounds",
+  "@settingRounds": { "description": "Label of the number of rounds setting." },
+  "settingWork": "Work, sec",
+  "@settingWork": { "description": "Label of the work interval length setting, in seconds." },
+  "settingRest": "Rest, sec",
+  "@settingRest": { "description": "Label of the rest interval length setting, in seconds." }
+}
