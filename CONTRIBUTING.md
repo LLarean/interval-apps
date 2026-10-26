@@ -28,7 +28,7 @@ what a good change looks like.
 dart format .
 flutter analyze
 (cd packages/interval_core && dart test)
-for dir in packages/interval_kit apps/tabata apps/walking; do (cd "$dir" && flutter test); done
+for dir in packages/interval_kit packages/interval_media apps/tabata apps/walking; do (cd "$dir" && flutter test); done
 ```
 
 If you changed text, edit the `.arb` files and run `flutter gen-l10n` in that

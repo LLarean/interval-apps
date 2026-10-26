@@ -6,7 +6,9 @@ A short tour of the decisions behind the code, for anyone about to change it.
 
 ```
 apps/tabata, apps/walking   what makes each app different: settings, phase names
-          │
+          │        │
+          │   packages/interval_media   music per pace, media session (walking only)
+          │        │
 packages/interval_kit       Flutter: theme, widgets, cues, workout screen, app shell
           │
 packages/interval_core      pure Dart: plans, phases, the timer
@@ -42,7 +44,9 @@ screen. An app passes in:
 
 - its settings as a `ValueNotifier`, and how to turn them into a `WorkoutPlan`;
 - what each phase is called and how time is written (`12` or `2:59`);
-- its settings screen, built from the shared steppers.
+- its settings screen, built from the shared steppers;
+- optionally, an `attach` callback for anything else that should follow the
+  workout. The walking app attaches its music and media session there.
 
 Everything else is shared, which is why each app is only a few small files.
 
@@ -65,10 +69,28 @@ deterministically.
 Cues are short, preloaded MP3s played through `audioplayers`. They *duck* other
 audio instead of stopping it, so music from another app keeps playing.
 
-The walking roadmap (the user's own playlists, running with the screen off)
-needs a media session and an Android foreground service. That will live in a
-new package next to `interval_kit`, so the Tabata app does not pick up
-permissions it does not need.
+### Music and the screen off
+
+The walking app's extras live in `interval_media`, so the Tabata app does not
+pick up their plugins and Android permissions.
+
+- `MusicLibrary` copies the files the user picks into the app's own storage,
+  one folder per intensity. The picker's copies and `content://` links can
+  vanish; the library's files cannot.
+- `PhaseMusic` keeps one player per intensity and follows the workout: silence
+  during the countdown, a three-second cross-fade at every change of pace,
+  an instant stop on pause. Each player keeps its position, so the next fast
+  phase continues the fast music. Players hide behind `TrackPlayer`, which
+  lets the fades be tested with fake time.
+- `WorkoutMediaSession` (on top of `audio_service`) shows the phase as "now
+  playing" in the notification and on the lock screen, and maps its buttons
+  and headset clicks to the workout. While the workout runs, the media service
+  stays in the foreground and holds a partial wake lock, so the Dart timer
+  keeps firing with the screen off. A paused or finished workout releases
+  both.
+
+Our cues ask for transient, duckable audio focus, so Android lowers the music
+under every beep and brings it back afterwards.
 
 ## Localisation
 
