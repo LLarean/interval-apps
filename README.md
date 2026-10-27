@@ -11,19 +11,33 @@ No ads, no account, no tracking. Works offline.
 [![Flutter](https://img.shields.io/badge/Flutter-3.47-02569B?logo=flutter)](https://flutter.dev)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
-<img src="docs/images/tabata-timer.png" width="200" alt="Tabata timer during a work interval">&nbsp;&nbsp;
-<img src="docs/images/tabata-settings.png" width="200" alt="Tabata settings">&nbsp;&nbsp;
-<img src="docs/images/walking-timer.png" width="200" alt="Japanese walking timer at a fast pace">&nbsp;&nbsp;
-<img src="docs/images/walking-music.png" width="200" alt="Japanese walking playlist for the fast pace">
-
 </div>
 
 ## The apps
 
-| | App | What it does | Try it |
-|---|---|---|---|
-| <img src="apps/tabata/assets/icon/icon.png" width="48" alt=""> | **[Tabata Timer](apps/tabata)** | The classic protocol — 20 s of work, 10 s of rest, 8 rounds — with every number adjustable. | [Web](https://llarean.org/interval-apps/tabata/) · [APK preview](https://github.com/LLarean/interval-apps/releases/download/preview/tabata-preview.apk) · [RuStore](https://www.rustore.ru/catalog/app/com.LLarean.TabataTimer) |
-| <img src="apps/walking/assets/icon/icon.png" width="48" alt=""> | **[Japanese Walking](apps/walking)** | Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute session. On Android, plays your own music for each pace and keeps going with the screen off. | [Web](https://llarean.org/interval-apps/walking/) · [APK preview](https://github.com/LLarean/interval-apps/releases/download/preview/walking-preview.apk) |
+### <img src="apps/tabata/assets/icon/icon.png" width="32" alt="" align="top"> [Tabata Timer](apps/tabata)
+
+The classic protocol — 20 s of work, 10 s of rest, 8 rounds — with every number adjustable.
+
+[Web](https://llarean.org/interval-apps/tabata/) · [APK preview](https://github.com/LLarean/interval-apps/releases/download/preview/tabata-preview.apk) · [RuStore](https://www.rustore.ru/catalog/app/com.LLarean.TabataTimer)
+
+<p align="center">
+  <img src="docs/images/tabata-timer.png" width="220" alt="Tabata timer during a work interval">&nbsp;&nbsp;&nbsp;
+  <img src="docs/images/tabata-settings.png" width="220" alt="Tabata settings">
+</p>
+
+### <img src="apps/walking/assets/icon/icon.png" width="32" alt="" align="top"> [Japanese Walking](apps/walking)
+
+Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute session. On Android, plays your own music for each pace and keeps going with the screen off.
+
+[Web](https://llarean.org/interval-apps/walking/) · [APK preview](https://github.com/LLarean/interval-apps/releases/download/preview/walking-preview.apk)
+
+<p align="center">
+  <img src="docs/images/walking-timer.png" width="220" alt="Japanese walking timer at a fast pace">&nbsp;&nbsp;&nbsp;
+  <img src="docs/images/walking-music.png" width="220" alt="Japanese walking playlist for the fast pace">
+</p>
+
+### Both apps
 
 Both apps speak English and Russian, play a sound when the phase changes and keep the screen on while the timer runs.
 
