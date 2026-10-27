@@ -5,9 +5,9 @@
 **Free, open-source interval timers for Android and the web.**<br>
 No ads, no account, no tracking. Works offline.
 
-[![CI](https://github.com/LLarean/interval-apps/actions/workflows/ci.yml/badge.svg)](https://github.com/LLarean/interval-apps/actions/workflows/ci.yml)
-[![Web](https://github.com/LLarean/interval-apps/actions/workflows/pages.yml/badge.svg)](https://github.com/LLarean/interval-apps/actions/workflows/pages.yml)
-[![Android preview](https://img.shields.io/badge/Android-preview_APK-405D26?logo=android&logoColor=white)](https://github.com/LLarean/interval-apps/releases/tag/preview)
+[![CI](https://github.com/manul-wizard/interval-apps/actions/workflows/ci.yml/badge.svg)](https://github.com/manul-wizard/interval-apps/actions/workflows/ci.yml)
+[![Web](https://github.com/manul-wizard/interval-apps/actions/workflows/pages.yml/badge.svg)](https://github.com/manul-wizard/interval-apps/actions/workflows/pages.yml)
+[![Android preview](https://img.shields.io/badge/Android-preview_APK-405D26?logo=android&logoColor=white)](https://github.com/manul-wizard/interval-apps/releases/tag/preview)
 [![Flutter](https://img.shields.io/badge/Flutter-3.47-02569B?logo=flutter)](https://flutter.dev)
 [![License: Apache-2.0](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](LICENSE)
 
@@ -19,7 +19,7 @@ No ads, no account, no tracking. Works offline.
 
 The classic protocol — 20 s of work, 10 s of rest, 8 rounds — with every number adjustable.
 
-[Web](https://llarean.org/interval-apps/tabata/) · [APK preview](https://github.com/LLarean/interval-apps/releases/download/preview/tabata-preview.apk) · [RuStore](https://www.rustore.ru/catalog/app/com.LLarean.TabataTimer)
+[Web](https://manul-wizard.github.io/interval-apps/tabata/) · [APK preview](https://github.com/manul-wizard/interval-apps/releases/download/preview/tabata-preview.apk) · [RuStore](https://www.rustore.ru/catalog/app/com.LLarean.TabataTimer)
 
 <p align="center">
   <img src="docs/images/tabata-timer.png" width="220" alt="Tabata timer during a work interval">&nbsp;&nbsp;&nbsp;
@@ -30,7 +30,7 @@ The classic protocol — 20 s of work, 10 s of rest, 8 rounds — with every num
 
 Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute session. On Android, plays your own music for each pace and keeps going with the screen off.
 
-[Web](https://llarean.org/interval-apps/walking/) · [APK preview](https://github.com/LLarean/interval-apps/releases/download/preview/walking-preview.apk)
+[Web](https://manul-wizard.github.io/interval-apps/walking/) · [APK preview](https://github.com/manul-wizard/interval-apps/releases/download/preview/walking-preview.apk)
 
 <p align="center">
   <img src="docs/images/walking-timer.png" width="220" alt="Japanese walking timer at a fast pace">&nbsp;&nbsp;&nbsp;
@@ -41,7 +41,7 @@ Interval walking: 3 minutes fast, 3 minutes slow, 5 times — a 30-minute sessio
 
 Both apps speak English and Russian, play a sound when the phase changes and keep the screen on while the timer runs.
 
-*APK preview* links point to [test builds of the latest `main`](https://github.com/LLarean/interval-apps/releases/tag/preview). They install next to the store versions as separate "Preview" apps and update each other.
+*APK preview* links point to [test builds of the latest `main`](https://github.com/manul-wizard/interval-apps/releases/tag/preview). They install next to the store versions as separate "Preview" apps and update each other.
 
 ## Why a monorepo
 
@@ -73,7 +73,7 @@ A fix in the engine or a widget lands in both apps with the next build. Read mor
 You need [Flutter 3.47](https://docs.flutter.dev/get-started/install) — the exact version is pinned in [`pubspec.yaml`](pubspec.yaml) — and, for Android builds, the Android SDK.
 
 ```sh
-git clone https://github.com/LLarean/interval-apps.git
+git clone https://github.com/manul-wizard/interval-apps.git
 cd interval-apps
 flutter pub get          # resolves the whole workspace at once
 

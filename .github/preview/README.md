@@ -1,7 +1,7 @@
 # Preview signing key
 
 `preview.keystore` signs the test builds that CI publishes as the
-[`preview` release](https://github.com/LLarean/interval-apps/releases/tag/preview).
+[`preview` release](https://github.com/manul-wizard/interval-apps/releases/tag/preview).
 It is public on purpose — store password, key alias and key password are all
 `preview` — so that every preview installs over the previous one.
 
