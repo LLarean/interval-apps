@@ -32,9 +32,13 @@ class _ProgressRingState extends State<ProgressRing>
     with SingleTickerProviderStateMixin {
   static const _colorDuration = Duration(milliseconds: 500);
 
+  // The ring shows real time, so it must not speed up when the system turns
+  // animations off, as Android does in battery saver mode. Otherwise it
+  // empties in a moment and jumps back every second.
   late final AnimationController _fraction = AnimationController(
     vsync: this,
     value: widget.remainingFraction,
+    animationBehavior: AnimationBehavior.preserve,
   );
 
   @override
