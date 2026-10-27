@@ -32,4 +32,10 @@ class KitLocalizationsRu extends KitLocalizations {
 
   @override
   String get increase => 'Увеличить';
+
+  @override
+  String get darkTheme => 'Тёмная тема';
+
+  @override
+  String get lightTheme => 'Светлая тема';
 }

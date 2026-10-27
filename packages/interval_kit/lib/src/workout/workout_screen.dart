@@ -18,6 +18,7 @@ class WorkoutScreen extends StatelessWidget {
     required this.phaseLabel,
     required this.formatTime,
     required this.onOpenSettings,
+    this.onToggleTheme,
     super.key,
   });
 
@@ -26,10 +27,17 @@ class WorkoutScreen extends StatelessWidget {
   final String Function(TimerSnapshot snapshot) formatTime;
   final VoidCallback onOpenSettings;
 
+  /// Switches between the light and the dark theme; the button is hidden
+  /// when it is null.
+  final VoidCallback? onToggleTheme;
+
   @override
   Widget build(BuildContext context) {
     final l10n = KitLocalizations.of(context);
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final textTheme = theme.textTheme;
+    final colors = IntervalColors.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Scaffold(
       body: SafeArea(
@@ -45,14 +53,27 @@ class WorkoutScreen extends StatelessWidget {
 
               return Column(
                 children: [
-                  Align(
-                    alignment: Alignment.topRight,
-                    child: IconButton(
-                      icon: const Icon(Icons.settings_outlined),
-                      tooltip: l10n.settings,
-                      padding: const EdgeInsets.all(16),
-                      onPressed: onOpenSettings,
-                    ),
+                  Row(
+                    children: [
+                      if (onToggleTheme case final onToggleTheme?)
+                        IconButton(
+                          icon: Icon(
+                            isDark
+                                ? Icons.light_mode_outlined
+                                : Icons.dark_mode_outlined,
+                          ),
+                          tooltip: isDark ? l10n.lightTheme : l10n.darkTheme,
+                          padding: const EdgeInsets.all(16),
+                          onPressed: onToggleTheme,
+                        ),
+                      const Spacer(),
+                      IconButton(
+                        icon: const Icon(Icons.settings_outlined),
+                        tooltip: l10n.settings,
+                        padding: const EdgeInsets.all(16),
+                        onPressed: onOpenSettings,
+                      ),
+                    ],
                   ),
                   const Spacer(),
                   SizedBox.square(
@@ -63,10 +84,8 @@ class WorkoutScreen extends StatelessWidget {
                           '${snapshot.phase.round}/${snapshot.plan.rounds}',
                       remainingFraction: snapshot.remainingFraction,
                       color: running
-                          ? IntervalColors.forIntensity(
-                              snapshot.phase.intensity,
-                            )
-                          : IntervalColors.idle,
+                          ? colors.forIntensity(snapshot.phase.intensity)
+                          : colors.idle,
                       drainOver: running ? snapshot.remainingInPhase : null,
                     ),
                   ),

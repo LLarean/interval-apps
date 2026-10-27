@@ -39,6 +39,7 @@ class ValueStepper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colors = IntervalColors.of(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -46,9 +47,9 @@ class ValueStepper extends StatelessWidget {
         Text(label, style: textTheme.titleMedium),
         const SizedBox(height: 10),
         DecoratedBox(
-          decoration: const ShapeDecoration(
-            color: IntervalColors.surface,
-            shape: StadiumBorder(),
+          decoration: ShapeDecoration(
+            color: colors.surface,
+            shape: const StadiumBorder(),
           ),
           child: SizedBox(
             width: 252,
@@ -69,7 +70,7 @@ class ValueStepper extends StatelessWidget {
                       value,
                       style: textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w700,
-                        color: IntervalColors.ink,
+                        color: colors.ink,
                       ),
                     ),
                   ),
@@ -134,6 +135,7 @@ class _RepeatingIconButtonState extends State<_RepeatingIconButton> {
   @override
   Widget build(BuildContext context) {
     final enabled = widget.onPressed != null;
+    final colors = IntervalColors.of(context);
 
     return GestureDetector(
       onLongPressStart: enabled ? (_) => _startRepeating() : null,
@@ -142,8 +144,8 @@ class _RepeatingIconButtonState extends State<_RepeatingIconButton> {
       child: IconButton(
         icon: Icon(widget.icon, semanticLabel: widget.semanticLabel),
         iconSize: 36,
-        color: IntervalColors.primary,
-        disabledColor: IntervalColors.muted,
+        color: colors.primary,
+        disabledColor: colors.muted,
         onPressed: widget.onPressed,
       ),
     );

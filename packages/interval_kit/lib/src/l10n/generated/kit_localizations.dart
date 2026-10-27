@@ -145,6 +145,18 @@ abstract class KitLocalizations {
   /// In en, this message translates to:
   /// **'Increase'**
   String get increase;
+
+  /// Tooltip of the button that turns the dark theme on.
+  ///
+  /// In en, this message translates to:
+  /// **'Dark theme'**
+  String get darkTheme;
+
+  /// Tooltip of the button that turns the light theme on.
+  ///
+  /// In en, this message translates to:
+  /// **'Light theme'**
+  String get lightTheme;
 }
 
 class _KitLocalizationsDelegate

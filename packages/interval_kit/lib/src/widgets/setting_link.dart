@@ -24,6 +24,7 @@ class SettingLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colors = IntervalColors.of(context);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -32,7 +33,7 @@ class SettingLink extends StatelessWidget {
         const SizedBox(height: 10),
         PressScale(
           child: Material(
-            color: IntervalColors.surface,
+            color: colors.surface,
             shape: const StadiumBorder(),
             clipBehavior: Clip.antiAlias,
             child: InkWell(
@@ -44,7 +45,7 @@ class SettingLink extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 24),
                   child: Row(
                     children: [
-                      Icon(icon, color: IntervalColors.primary),
+                      Icon(icon, color: colors.primary),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Text(

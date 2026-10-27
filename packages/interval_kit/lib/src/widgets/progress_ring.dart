@@ -79,6 +79,7 @@ class _ProgressRingState extends State<ProgressRing>
         painter: _RingPainter(
           fraction: _fraction,
           color: color ?? widget.color,
+          trackColor: IntervalColors.of(context).surface,
         ),
         child: child,
       ),
@@ -88,11 +89,15 @@ class _ProgressRingState extends State<ProgressRing>
 }
 
 class _RingPainter extends CustomPainter {
-  _RingPainter({required this.fraction, required this.color})
-    : super(repaint: fraction);
+  _RingPainter({
+    required this.fraction,
+    required this.color,
+    required this.trackColor,
+  }) : super(repaint: fraction);
 
   final Animation<double> fraction;
   final Color color;
+  final Color trackColor;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -105,13 +110,7 @@ class _RingPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = strokeWidth;
 
-    canvas.drawArc(
-      rect,
-      0,
-      math.pi * 2,
-      false,
-      paint..color = IntervalColors.surface,
-    );
+    canvas.drawArc(rect, 0, math.pi * 2, false, paint..color = trackColor);
     canvas.drawArc(
       rect,
       -math.pi / 2,
@@ -123,5 +122,7 @@ class _RingPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(_RingPainter oldDelegate) =>
-      oldDelegate.color != color || oldDelegate.fraction != fraction;
+      oldDelegate.color != color ||
+      oldDelegate.trackColor != trackColor ||
+      oldDelegate.fraction != fraction;
 }

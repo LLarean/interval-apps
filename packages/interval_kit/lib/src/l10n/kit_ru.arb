@@ -7,5 +7,7 @@
   "settings": "Настройки",
   "language": "Язык",
   "decrease": "Уменьшить",
-  "increase": "Увеличить"
+  "increase": "Увеличить",
+  "darkTheme": "Тёмная тема",
+  "lightTheme": "Светлая тема"
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:interval_core/interval_core.dart';
 
 import '../audio/cue_player.dart';
@@ -17,13 +18,16 @@ typedef WorkoutAttachment = VoidCallback Function(WorkoutController workout);
 /// The application shell shared by every app.
 ///
 /// It owns the [WorkoutController], follows the [settings] — switching the
-/// language and restarting the workout when its plan changes — and opens
-/// the settings screen. Apps describe only what makes them different.
+/// language and the theme, and restarting the workout when its plan
+/// changes — and opens the settings screen. Apps describe only what makes
+/// them different.
 class IntervalApp<S> extends StatefulWidget {
   const IntervalApp({
     required this.settings,
     required this.planOf,
     required this.languageOf,
+    required this.themeModeOf,
+    required this.withThemeMode,
     required this.cues,
     required this.onGenerateTitle,
     required this.localizationsDelegates,
@@ -39,6 +43,10 @@ class IntervalApp<S> extends StatefulWidget {
   final ValueNotifier<S> settings;
   final WorkoutPlan Function(S settings) planOf;
   final AppLanguage Function(S settings) languageOf;
+  final ThemeMode Function(S settings) themeModeOf;
+
+  /// Returns [settings] with the theme changed, when the user switches it.
+  final S Function(S settings, ThemeMode themeMode) withThemeMode;
   final CuePlayer cues;
   final GenerateAppTitle onGenerateTitle;
 
@@ -85,6 +93,16 @@ class _IntervalAppState<S> extends State<IntervalApp<S>> {
     super.dispose();
   }
 
+  /// Switches to the opposite of the theme on screen. From then on the
+  /// choice is kept instead of following the device.
+  void _toggleTheme(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    widget.settings.value = widget.withThemeMode(
+      widget.settings.value,
+      isDark ? ThemeMode.light : ThemeMode.dark,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -93,6 +111,16 @@ class _IntervalAppState<S> extends State<IntervalApp<S>> {
         debugShowCheckedModeBanner: false,
         onGenerateTitle: widget.onGenerateTitle,
         theme: buildIntervalTheme(),
+        darkTheme: buildIntervalTheme(brightness: Brightness.dark),
+        themeMode: widget.themeModeOf(settings),
+        // Without an app bar on the main screen, the status bar icons have
+        // to be told to match the theme.
+        builder: (context, child) => AnnotatedRegion(
+          value: Theme.of(context).brightness == Brightness.dark
+              ? SystemUiOverlayStyle.light
+              : SystemUiOverlayStyle.dark,
+          child: child!,
+        ),
         locale: widget.languageOf(settings).locale,
         supportedLocales: widget.supportedLocales,
         localizationsDelegates: [
@@ -106,6 +134,7 @@ class _IntervalAppState<S> extends State<IntervalApp<S>> {
             formatTime: widget.formatTime,
             onOpenSettings: () => Navigator.of(context)
                 .push(MaterialPageRoute<void>(builder: widget.settingsBuilder)),
+            onToggleTheme: () => _toggleTheme(context),
           ),
         ),
       ),

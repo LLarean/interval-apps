@@ -15,5 +15,9 @@
   "decrease": "Decrease",
   "@decrease": { "description": "Screen-reader label of a minus button." },
   "increase": "Increase",
-  "@increase": { "description": "Screen-reader label of a plus button." }
+  "@increase": { "description": "Screen-reader label of a plus button." },
+  "darkTheme": "Dark theme",
+  "@darkTheme": { "description": "Tooltip of the button that turns the dark theme on." },
+  "lightTheme": "Light theme",
+  "@lightTheme": { "description": "Tooltip of the button that turns the light theme on." }
 }

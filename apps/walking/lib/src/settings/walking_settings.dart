@@ -9,6 +9,7 @@ final class WalkingSettings {
     this.rounds = 5,
     this.fastMinutes = 3,
     this.slowMinutes = 3,
+    this.themeMode = ThemeMode.system,
   });
 
   static const roundsRange = IntRange(1, 20);
@@ -22,6 +23,9 @@ final class WalkingSettings {
   final int rounds;
   final int fastMinutes;
   final int slowMinutes;
+
+  /// Light, dark, or [ThemeMode.system] to follow the device.
+  final ThemeMode themeMode;
 
   /// Rounds of fast then slow walking; the last slow interval is the
   /// cool-down. The defaults give the classic 30-minute session.
@@ -37,11 +41,13 @@ final class WalkingSettings {
     int? rounds,
     int? fastMinutes,
     int? slowMinutes,
+    ThemeMode? themeMode,
   }) => WalkingSettings(
     language: language ?? this.language,
     rounds: rounds ?? this.rounds,
     fastMinutes: fastMinutes ?? this.fastMinutes,
     slowMinutes: slowMinutes ?? this.slowMinutes,
+    themeMode: themeMode ?? this.themeMode,
   );
 
   @override
@@ -50,8 +56,10 @@ final class WalkingSettings {
       other.language == language &&
       other.rounds == rounds &&
       other.fastMinutes == fastMinutes &&
-      other.slowMinutes == slowMinutes;
+      other.slowMinutes == slowMinutes &&
+      other.themeMode == themeMode;
 
   @override
-  int get hashCode => Object.hash(language, rounds, fastMinutes, slowMinutes);
+  int get hashCode =>
+      Object.hash(language, rounds, fastMinutes, slowMinutes, themeMode);
 }

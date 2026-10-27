@@ -2,47 +2,52 @@ import 'package:flutter/material.dart';
 
 import 'interval_colors.dart';
 
-/// Builds the light theme every app shares.
-ThemeData buildIntervalTheme() {
+/// Builds the light or dark theme every app shares.
+ThemeData buildIntervalTheme({Brightness brightness = Brightness.light}) {
+  final colors = brightness == Brightness.dark
+      ? IntervalColors.dark
+      : IntervalColors.light;
   final colorScheme = ColorScheme.fromSeed(
-    seedColor: IntervalColors.primary,
-    primary: IntervalColors.primary,
-    onPrimary: IntervalColors.onPrimary,
-    surface: IntervalColors.background,
-    onSurface: IntervalColors.ink,
-    surfaceContainerHighest: IntervalColors.surface,
+    seedColor: colors.primary,
+    brightness: brightness,
+    primary: colors.primary,
+    onPrimary: colors.onPrimary,
+    surface: colors.background,
+    onSurface: colors.ink,
+    surfaceContainerHighest: colors.surface,
   );
 
   final base = ThemeData(
     colorScheme: colorScheme,
-    scaffoldBackgroundColor: IntervalColors.background,
+    scaffoldBackgroundColor: colors.background,
     fontFamily: 'Ubuntu',
     package: 'interval_kit',
+    extensions: [colors],
   );
 
   return base.copyWith(
     textTheme: base.textTheme
-        .apply(bodyColor: IntervalColors.ink, displayColor: IntervalColors.ink)
+        .apply(bodyColor: colors.ink, displayColor: colors.ink)
         .copyWith(
           displayLarge: base.textTheme.displayLarge?.copyWith(
             fontSize: 112,
             fontWeight: FontWeight.w700,
             height: 1,
-            color: IntervalColors.ink,
+            color: colors.ink,
             fontFeatures: const [FontFeature.tabularFigures()],
           ),
           headlineMedium: base.textTheme.headlineMedium?.copyWith(
             fontWeight: FontWeight.w700,
-            color: IntervalColors.ink,
+            color: colors.ink,
           ),
           titleLarge: base.textTheme.titleLarge?.copyWith(
             fontWeight: FontWeight.w700,
             letterSpacing: 1.5,
-            color: IntervalColors.muted,
+            color: colors.muted,
           ),
           titleMedium: base.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.w500,
-            color: IntervalColors.ink,
+            color: colors.ink,
           ),
           labelLarge: base.textTheme.labelLarge?.copyWith(
             fontSize: 22,
@@ -50,6 +55,6 @@ ThemeData buildIntervalTheme() {
             letterSpacing: 1.2,
           ),
         ),
-    iconTheme: const IconThemeData(color: IntervalColors.muted, size: 36),
+    iconTheme: IconThemeData(color: colors.muted, size: 36),
   );
 }

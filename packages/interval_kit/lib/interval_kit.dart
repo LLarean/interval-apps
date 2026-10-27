@@ -1,6 +1,7 @@
 /// Flutter building blocks shared by the interval apps.
 library;
 
+export 'package:flutter/material.dart' show ThemeMode;
 export 'package:interval_core/interval_core.dart';
 
 export 'src/app/interval_app.dart';
@@ -11,6 +12,7 @@ export 'src/l10n/generated/kit_localizations.dart';
 export 'src/settings/app_language.dart';
 export 'src/settings/int_range.dart';
 export 'src/settings/setting_stepper.dart';
+export 'src/settings/theme_preference.dart';
 export 'src/theme/interval_colors.dart';
 export 'src/theme/interval_theme.dart';
 export 'src/widgets/pill_button.dart';

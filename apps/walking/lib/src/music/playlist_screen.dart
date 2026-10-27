@@ -54,7 +54,7 @@ class _PlaylistScreenState extends State<PlaylistScreen> {
                 l10n.musicEmpty,
                 textAlign: TextAlign.center,
                 style: Theme.of(context).textTheme.bodyLarge
-                    ?.copyWith(color: IntervalColors.muted),
+                    ?.copyWith(color: IntervalColors.of(context).muted),
               )
             else
               Column(
@@ -93,10 +93,12 @@ class _TrackPlate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = IntervalColors.of(context);
+
     return DecoratedBox(
-      decoration: const ShapeDecoration(
-        color: IntervalColors.surface,
-        shape: StadiumBorder(),
+      decoration: ShapeDecoration(
+        color: colors.surface,
+        shape: const StadiumBorder(),
       ),
       child: ConstrainedBox(
         constraints: const BoxConstraints(maxWidth: 360, minHeight: 64),
@@ -104,11 +106,7 @@ class _TrackPlate extends StatelessWidget {
           padding: const EdgeInsets.only(left: 24, right: 8),
           child: Row(
             children: [
-              const Icon(
-                Icons.music_note_outlined,
-                color: IntervalColors.primary,
-                size: 24,
-              ),
+              Icon(Icons.music_note_outlined, color: colors.primary, size: 24),
               const SizedBox(width: 12),
               Expanded(
                 child: Text(

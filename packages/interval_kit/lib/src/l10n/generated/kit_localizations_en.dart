@@ -32,4 +32,10 @@ class KitLocalizationsEn extends KitLocalizations {
 
   @override
   String get increase => 'Increase';
+
+  @override
+  String get darkTheme => 'Dark theme';
+
+  @override
+  String get lightTheme => 'Light theme';
 }

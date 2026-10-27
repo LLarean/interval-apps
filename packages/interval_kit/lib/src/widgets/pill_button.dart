@@ -12,13 +12,15 @@ class PillButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = IntervalColors.of(context);
+
     return PressScale(
       enabled: onPressed != null,
       child: FilledButton(
         onPressed: onPressed,
         style: FilledButton.styleFrom(
-          backgroundColor: IntervalColors.primary,
-          foregroundColor: IntervalColors.onPrimary,
+          backgroundColor: colors.primary,
+          foregroundColor: colors.onPrimary,
           minimumSize: const Size(248, 68),
           shape: const StadiumBorder(),
           textStyle: Theme.of(context).textTheme.labelLarge,
@@ -42,12 +44,14 @@ class FlatTextButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = IntervalColors.of(context);
+
     return PressScale(
       enabled: onPressed != null,
       child: TextButton(
         onPressed: onPressed,
         style: TextButton.styleFrom(
-          foregroundColor: IntervalColors.primary,
+          foregroundColor: colors.primary,
           minimumSize: const Size(160, 56),
           shape: const StadiumBorder(),
           textStyle: Theme.of(context).textTheme.labelLarge,

@@ -10,6 +10,7 @@ final class SettingsStore {
   SettingsStore._(this._preferences);
 
   static const _language = 'language';
+  static const _theme = 'theme';
   static const _rounds = 'rounds';
   static const _work = 'workSeconds';
   static const _rest = 'restSeconds';
@@ -17,19 +18,21 @@ final class SettingsStore {
   static Future<SettingsStore> open() async => SettingsStore._(
     await SharedPreferencesWithCache.create(
       cacheOptions: const SharedPreferencesWithCacheOptions(
-        allowList: {_language, _rounds, _work, _rest},
+        allowList: {_language, _rounds, _work, _rest, _theme},
       ),
     ),
   );
 
   final SharedPreferencesWithCache _preferences;
 
-  /// Reads the saved settings; on first launch, picks the device language.
+  /// Reads the saved settings; on first launch, picks the device language
+  /// and follows the device theme.
   TabataSettings load({required List<Locale> deviceLocales}) {
     const defaults = TabataSettings(language: AppLanguage.english);
     final language = _preferences.getString(_language);
 
     return TabataSettings(
+      themeMode: ThemePreference.fromCode(_preferences.getString(_theme)),
       language: language == null
           ? AppLanguage.fromLocales(deviceLocales)
           : AppLanguage.fromCode(language),
@@ -48,6 +51,10 @@ final class SettingsStore {
   Future<void> save(TabataSettings settings) async {
     await Future.wait([
       _preferences.setString(_language, settings.language.code),
+      if (settings.themeMode.code case final theme?)
+        _preferences.setString(_theme, theme)
+      else
+        _preferences.remove(_theme),
       _preferences.setInt(_rounds, settings.rounds),
       _preferences.setInt(_work, settings.workSeconds),
       _preferences.setInt(_rest, settings.restSeconds),

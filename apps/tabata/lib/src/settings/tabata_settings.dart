@@ -9,6 +9,7 @@ final class TabataSettings {
     this.rounds = 8,
     this.workSeconds = 20,
     this.restSeconds = 10,
+    this.themeMode = ThemeMode.system,
   });
 
   static const roundsRange = IntRange(2, 99);
@@ -19,6 +20,9 @@ final class TabataSettings {
   final int rounds;
   final int workSeconds;
   final int restSeconds;
+
+  /// Light, dark, or [ThemeMode.system] to follow the device.
+  final ThemeMode themeMode;
 
   /// The classic protocol: a countdown as long as a rest, then rounds of
   /// work and rest, finishing on the last work interval.
@@ -35,11 +39,13 @@ final class TabataSettings {
     int? rounds,
     int? workSeconds,
     int? restSeconds,
+    ThemeMode? themeMode,
   }) => TabataSettings(
     language: language ?? this.language,
     rounds: rounds ?? this.rounds,
     workSeconds: workSeconds ?? this.workSeconds,
     restSeconds: restSeconds ?? this.restSeconds,
+    themeMode: themeMode ?? this.themeMode,
   );
 
   @override
@@ -48,8 +54,10 @@ final class TabataSettings {
       other.language == language &&
       other.rounds == rounds &&
       other.workSeconds == workSeconds &&
-      other.restSeconds == restSeconds;
+      other.restSeconds == restSeconds &&
+      other.themeMode == themeMode;
 
   @override
-  int get hashCode => Object.hash(language, rounds, workSeconds, restSeconds);
+  int get hashCode =>
+      Object.hash(language, rounds, workSeconds, restSeconds, themeMode);
 }

@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:interval_kit/interval_kit.dart';
 
@@ -10,20 +10,24 @@ void main() {
     low: const Duration(seconds: 5),
   );
 
-  Widget app({required WorkoutAttachment attach}) => IntervalApp(
-    settings: ValueNotifier(0),
-    planOf: (_) => plan,
-    languageOf: (_) => AppLanguage.english,
-    cues: const SilentCuePlayer(),
-    keepScreenOn: ({required enabled}) async {},
-    onGenerateTitle: (_) => 'Test',
-    localizationsDelegates: const [],
-    supportedLocales: const [Locale('en')],
-    phaseLabel: (_, phase) => phase.intensity.name,
-    formatTime: (snapshot) => '${snapshot.remainingSeconds}',
-    settingsBuilder: (_) => const SizedBox(),
-    attach: attach,
-  );
+  // The theme is the only setting these tests need.
+  Widget app({ValueNotifier<ThemeMode>? settings, WorkoutAttachment? attach}) =>
+      IntervalApp(
+        settings: settings ?? ValueNotifier(ThemeMode.system),
+        planOf: (_) => plan,
+        languageOf: (_) => AppLanguage.english,
+        themeModeOf: (themeMode) => themeMode,
+        withThemeMode: (_, themeMode) => themeMode,
+        cues: const SilentCuePlayer(),
+        keepScreenOn: ({required enabled}) async {},
+        onGenerateTitle: (_) => 'Test',
+        localizationsDelegates: const [],
+        supportedLocales: const [Locale('en')],
+        phaseLabel: (_, phase) => phase.intensity.name,
+        formatTime: (snapshot) => '${snapshot.remainingSeconds}',
+        settingsBuilder: (_) => const SizedBox(),
+        attach: attach,
+      );
 
   testWidgets('attaches to the workout once and detaches on dispose', (
     tester,
@@ -48,5 +52,29 @@ void main() {
     await tester.pumpWidget(const SizedBox());
 
     expect(detached, 1);
+  });
+
+  Brightness brightnessOnScreen(WidgetTester tester) =>
+      Theme.of(tester.element(find.byType(WorkoutScreen))).brightness;
+
+  testWidgets('follows the device theme until the user picks one', (
+    tester,
+  ) async {
+    tester.platformDispatcher.platformBrightnessTestValue = Brightness.dark;
+    addTearDown(tester.platformDispatcher.clearPlatformBrightnessTestValue);
+    final settings = ValueNotifier(ThemeMode.system);
+
+    await tester.pumpWidget(app(settings: settings));
+    expect(brightnessOnScreen(tester), Brightness.dark);
+
+    await tester.tap(find.byTooltip('Light theme'));
+    await tester.pumpAndSettle();
+    expect(settings.value, ThemeMode.light);
+    expect(brightnessOnScreen(tester), Brightness.light);
+
+    await tester.tap(find.byTooltip('Dark theme'));
+    await tester.pumpAndSettle();
+    expect(settings.value, ThemeMode.dark);
+    expect(brightnessOnScreen(tester), Brightness.dark);
   });
 }

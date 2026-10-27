@@ -25,6 +25,9 @@ class TabataApp extends StatelessWidget {
       settings: settings,
       planOf: (settings) => settings.toPlan(),
       languageOf: (settings) => settings.language,
+      themeModeOf: (settings) => settings.themeMode,
+      withThemeMode: (settings, themeMode) =>
+          settings.copyWith(themeMode: themeMode),
       cues: cues,
       keepScreenOn: keepScreenOn,
       onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,

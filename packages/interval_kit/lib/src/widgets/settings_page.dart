@@ -19,6 +19,8 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = IntervalColors.of(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(title.toUpperCase()),
@@ -29,7 +31,7 @@ class SettingsPage extends StatelessWidget {
         toolbarHeight: 72,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back_ios_new),
-          color: IntervalColors.muted,
+          color: colors.muted,
           tooltip: MaterialLocalizations.of(context).backButtonTooltip,
           onPressed: () => Navigator.of(context).maybePop(),
         ),
@@ -48,7 +50,7 @@ class SettingsPage extends StatelessWidget {
               Align(
                 alignment: Alignment.centerRight,
                 child: DefaultTextStyle.merge(
-                  style: const TextStyle(color: IntervalColors.muted),
+                  style: TextStyle(color: colors.muted),
                   child: footer,
                 ),
               ),
